@@ -6,7 +6,7 @@ class ChessMove
 {
     public:
         ChessMove();
-        unsigned int From[2];
-        unsigned int To[2];
+        int From[2];
+        int To[2];
 };
 #endif

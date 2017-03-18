@@ -15,7 +15,6 @@ private:
     bool checkForKnight(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
     bool checkForKing(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
     bool checkForQueen(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
-    
 public:
     ChessMove Moves[200];
     int playerToMove;
@@ -27,6 +26,7 @@ public:
     void showState();
     void showMoves();
     bool makeMove(ChessMove pieceMove);
+    bool isPlayerInCheck();
 
 };
 #endif // CHESSSTATE_H

@@ -988,6 +988,36 @@ int ChessState::makeValidMovesList() {
     return 0;
 }
 
+bool ChessState:: isPlayerInCheck(){
+    int kingToCheck;
+    int kingIndex[2];
+    if (this->playerToMove<0)
+        kingToCheck=-6;
+    else
+        kingToCheck=6;
+
+    kingIndex[0] = kingIndex[1] = -1;
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            if (kingToCheck==this->board[i][j])
+            {
+                kingIndex[0]=i;
+                kingIndex[1]=j;
+            }
+        }
+    }
+
+    for (int i = 0; i < this->movesCount ; ++i) {
+        if (getPlayerColorAtIndex(this->board,kingIndex[0],kingIndex[1]) != getPlayerColorAtIndex(this->board,this->Moves[i].From[0],this->Moves[i].From[1]) )
+        {
+            if (this->Moves[i].To[0]==kingIndex[0] && this->Moves[i].To[1]==kingIndex[1])
+            {
+                return true;
+            }
+        }
+    }
+}
+
 void ChessState::showMoves() {
     cout << endl << "Total Possible Moves in this State: " << this->movesCount;
     cout << endl;
@@ -1098,5 +1128,5 @@ ChessState::ChessState() {
             board[i][j] = -board[7 - i][j];
         }
     }
-    board[4][3] = -5;
+    //board[4][3] = -5;
 }

@@ -18,7 +18,7 @@ public:
         //Chess Board Initialized
         chessBoard.InitBoard();
         this->current_ChessBoard_State = new ChessState();
-        current_ChessBoard_State->playerToMove = -1; //sets turn for White by default...
+        current_ChessBoard_State->playerToMove = 1; //sets turn for White by default...
 
     }
 
