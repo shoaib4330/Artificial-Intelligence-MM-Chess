@@ -1,0 +1,62 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessBoard.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessPlayer.h
+ChessMove.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+ChessState.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessProblem.h
+ChessBoard.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessBoard.h
+ChessState.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+PlayerChessCustom.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/PlayerChessCustom.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+ChessMove.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/PlayerChessCustom.h
+ChessPlayer.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessPlayer.h
+iostream
+-
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Source/ChessMove.cpp
+../Headers/ChessMove.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Source/ChessPlayer.cpp
+../Headers/ChessPlayer.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessPlayer.h
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Source/ChessState.cpp
+../Headers/ChessState.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+iostream
+-
+
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Source/main.cpp
+iostream
+-
+../Headers/ChessState.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+../Headers/ChessMove.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+../Headers/ChessBoard.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessBoard.h
+../Headers/ChessProblem.h
+/Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessProblem.h
+
