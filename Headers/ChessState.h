@@ -27,6 +27,7 @@ public:
     void showMoves();
     bool makeMove(ChessMove pieceMove);
     bool isPlayerInCheck();
+    bool isPlayerCheckedMate();
 
 };
 #endif // CHESSSTATE_H

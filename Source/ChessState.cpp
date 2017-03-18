@@ -364,11 +364,7 @@ bool ChessState::checkForBishop(int currentPieceInteger, int toRow, int toCol, i
                             int currentRow = fromRow;
                             for (int i = fromCol - 1; i >= toCol; --i) {
                                 currentRow--;
-                                //int currentRow= fromRow-1;
-                                //if (i<)
-                                //{
 
-                                //}
                                 if (i == toCol && currentRow == toRow) {
                                     if (this->board[currentRow][i] == 0 ||
                                         getPlayerColorAtIndex(this->board, currentRow, i) == -1) {
@@ -1016,6 +1012,69 @@ bool ChessState:: isPlayerInCheck(){
             }
         }
     }
+    return false;
+}
+
+bool ChessState:: isPlayerCheckedMate(){
+    int kingToCheck;
+    int kingIndex[2];
+    if (this->playerToMove<0)
+        kingToCheck=-6;
+    else
+        kingToCheck=6;
+
+    kingIndex[0] = kingIndex[1] = -1;
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            if (kingToCheck==this->board[i][j])
+            {
+                kingIndex[0]=i;
+                kingIndex[1]=j;
+            }
+        }
+    }
+
+    ChessState tempoState;
+    for (int k = 0; k < 8; ++k) {
+        for (int i = 0; i < 8; ++i) {
+            tempoState.board[k][i] = this->board[k][i];
+        }
+    }
+
+    tempoState.addValidCorresspondingMoveForPiece(kingIndex[0],kingIndex[1],tempoState.board);
+    ChessMove possiblMovesForKing [tempoState.movesCount];
+    int totalTruesNeeded = tempoState.movesCount+1;
+    int currentTrues =0;
+    for (int l = 0; l < tempoState.movesCount ; ++l) {
+        possiblMovesForKing[l] = tempoState.Moves[l];
+    }
+
+    for (int i = 0; i < this->movesCount ; ++i) {
+        if (getPlayerColorAtIndex(this->board,kingIndex[0],kingIndex[1]) != getPlayerColorAtIndex(this->board,this->Moves[i].From[0],this->Moves[i].From[1]) )
+        {
+            if (this->Moves[i].To[0]==kingIndex[0] && this->Moves[i].To[1]==kingIndex[1])
+            {
+                currentTrues++;
+            }
+        }
+    }
+
+    for (int m = 0; m < tempoState.movesCount ; ++m) {
+        for (int i = 0; i < this->movesCount ; ++i) {
+            if (getPlayerColorAtIndex(this->board,kingIndex[0],kingIndex[1]) != getPlayerColorAtIndex(this->board,this->Moves[i].From[0],this->Moves[i].From[1]) )
+            {
+                if (this->Moves[i].To[0]==possiblMovesForKing[m].To[0] && this->Moves[i].To[1]==possiblMovesForKing[m].To[1])
+                {
+                    currentTrues++;
+                }
+            }
+        }
+    }
+    if (totalTruesNeeded==currentTrues)
+    {
+        return true;
+    }
+    return false;
 }
 
 void ChessState::showMoves() {
