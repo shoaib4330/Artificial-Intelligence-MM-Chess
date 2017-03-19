@@ -1,11 +1,112 @@
 #include "../Headers/ChessState.h"
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 bool ChessState::makeMove(ChessMove pieceMove) {
     this->playerToMove *= -1;
+    this->board[pieceMove.To[0]][pieceMove.To[1]] = this->board[pieceMove.From[0]][pieceMove.From[1]];
+    this->board[pieceMove.From[0]][pieceMove.From[1]] =0;
     return true;
+}
+
+int ChessState ::getQueensNum(int playerIndex) {
+    int piece=0;
+    int count=0;
+    if (playerIndex==+1)
+        piece=5;
+    else
+        piece=-5;
+
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8 ; ++j) {
+            if (board[i][j]==piece)
+                count++;
+        }
+    }
+    return count;
+}
+
+int ChessState ::getBishopsNum(int playerIndex) {
+    int piece=0;
+    int count=0;
+    if (playerIndex==+1)
+        piece=3;
+    else
+        piece=-3;
+
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8 ; ++j) {
+            if (board[i][j]==piece)
+                count++;
+        }
+    }
+    return count;
+}
+
+int ChessState ::getKnightsNum(int playerIndex) {
+    int piece=0;
+    int count=0;
+    if (playerIndex==+1)
+        piece=2;
+    else
+        piece=-2;
+
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8 ; ++j) {
+            if (board[i][j]==piece)
+                count++;
+        }
+    }
+    return count;
+}
+
+int ChessState ::getPawnsNum(int playerIndex) {
+    int piece=0;
+    int count=0;
+    if (playerIndex==+1)
+        piece=1;
+    else
+        piece=-1;
+
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8 ; ++j) {
+            if (board[i][j]==piece)
+                count++;
+        }
+    }
+    return count;
+}
+
+int ChessState ::getRooksNum(int playerIndex) {
+    int piece=0;
+    int count=0;
+    if (playerIndex==+1)
+        piece=4;
+    else
+        piece=-4;
+
+    for (int i = 0; i < 8 ; ++i) {
+        for (int j = 0; j < 8 ; ++j) {
+            if (board[i][j]==piece)
+                count++;
+        }
+    }
+    return count;
+}
+
+ChessState ChessState::nextState(ChessMove gChessMove) {
+    ChessState newChessState = *this;
+    newChessState.makeMove(gChessMove);
+    return newChessState;
+}
+
+int ChessState::getPlayerToMove(){
+    return this->playerToMove;
+}
+
+void ChessState::setPlayerToMove(int givenPlayer){
+    this->playerToMove=givenPlayer;
 }
 
 int ChessState::getPlayerColorAtIndex(int aBoard[][8], int i, int j) {
@@ -45,7 +146,7 @@ bool ChessState::checkForPawn(int currentPieceInteger, int toRow, int toCol, int
                             if (this->board[fromRow - 1][fromCol] == 0 && this->board[fromRow - 2][fromCol] == 0) {
                                 return true;
                             } else {
-                                false;
+                                return false;
                             }
                         } else if (fromRow - toRow == 1) {
                             if (this->board[fromRow - 1][fromCol] == 0) {
@@ -82,7 +183,7 @@ bool ChessState::checkForPawn(int currentPieceInteger, int toRow, int toCol, int
                         if (this->board[fromRow - 1][fromCol] == 0 && this->board[fromRow - 2][fromCol] == 0) {
                             return true;
                         } else {
-                            false;
+                            return false;
                         }
                     } else if (fromRow - toRow == 1) {
                         if (this->board[fromRow - 1][fromCol] == 0) {
@@ -114,13 +215,13 @@ bool ChessState::checkForPawn(int currentPieceInteger, int toRow, int toCol, int
         } else if (currentPieceInteger == -1 && PlayerGoatsSpecifier < 0) {
             //Its White player...Will Need Decrement For Moving..
             if (fromRow < 1) {
-                cout << endl << "isTraversalPossible: Black Pawn cannot be at Row<1";
+                //--cout << endl << "isTraversalPossible: Black Pawn cannot be at Row<1";
                 return false;
             } else if (fromRow == 7) {
                 //Cannot go forward Move not possible for you..Cannot go back either...
                 return false;
             } else if (toRow < 1) {
-                cout << endl << "isTraversalPossible: Black Pawn cannot move to Row<1";
+                //--cout << endl << "isTraversalPossible: Black Pawn cannot move to Row<1";
                 return false;
             }
 
@@ -132,7 +233,7 @@ bool ChessState::checkForPawn(int currentPieceInteger, int toRow, int toCol, int
                             if (this->board[fromRow + 1][fromCol] == 0 && this->board[fromRow + 2][fromCol] == 0) {
                                 return true;
                             } else {
-                                false;
+                                return false;
                             }
                         } else if (toRow - fromRow == 1) {
                             if (this->board[fromRow + 1][fromCol] == 0) {
@@ -169,7 +270,7 @@ bool ChessState::checkForPawn(int currentPieceInteger, int toRow, int toCol, int
                         if (this->board[fromRow + 1][fromCol] == 0 && this->board[fromRow + 2][fromCol] == 0) {
                             return true;
                         } else {
-                            false;
+                            return false;
                         }
                     } else if (toRow - fromRow == 1) {
                         if (this->board[fromRow + 1][fromCol] == 0) {
@@ -893,7 +994,7 @@ bool ChessState::checkForKing(int currentPieceInteger, int toRow, int toCol, int
             }
         }
     }
-
+    return false;
 }
 
 bool ChessState::checkForQueen(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol) {
@@ -929,7 +1030,7 @@ bool ChessState::isTraversalPossible(int currentPieceInteger, int toRow, int toC
     } else if (currentPieceInteger == 5 || currentPieceInteger == -5){
         return checkForQueen(currentPieceInteger, toRow, toCol, fromRow, fromCol);
     } else if (true) {
-        cout << endl << "Koi Aur Giiti Agai he";
+        //--cout << endl << "Koi Aur Giiti Agai he";
     }
     return false;
 }
@@ -953,9 +1054,9 @@ void ChessState::addValidCorresspondingMoveForPiece(int pieceRow, int pieceColum
             int colorOfOwn = getPlayerColorAtIndex(secondaryBoard, pieceRow, pieceColumn);
 
             if (colorAtTarget == colorOfOwn) {
-                cout << endl << "Move not possible, piece of same player already exists at targeted index";
+                //--cout << endl << "Move not possible, piece of same player already exists at targeted index";
             } else {
-                cout << endl << "Move might be possible, Adversary exists at targeted index";
+                //--cout << endl << "Move might be possible, Adversary exists at targeted index";
                 bool toBeAdded = isTraversalPossible(currentPieceInteger, k, l, pieceRow, pieceColumn);
                 if (toBeAdded) {
                     this->Moves[this->movesCount].From[0] = pieceRow;
@@ -976,12 +1077,64 @@ int ChessState::makeValidMovesList() {
     // This function must create a list of all valid moves for the player in the current
     // state of the game;
     //  it must return an integer specifying total valid moves in the list
+    this->movesCount=0;
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
             addValidCorresspondingMoveForPiece(i, j, this->board);
         }
     }
-    return 0;
+
+
+    for (int k = 0; k < movesCount ; ++k) {
+
+        if (movesCount-1-k > k)
+        {
+            ChessMove tempMove =this->Moves[k];
+            this->Moves[k] = this->Moves[movesCount-1-k];
+            this->Moves[movesCount-1-k]= tempMove;
+        }
+
+    }
+
+    int *arr = new int[movesCount];
+    for (int l = 0; l < movesCount ; ++l) {
+        arr[l] = l;
+    }
+
+    vector<ChessMove> tempArray;
+    for (int m = 0; m < movesCount ; ++m) {
+        tempArray.push_back(Moves[m]);
+    }
+
+    random_shuffle(&arr[0],&arr[movesCount]);
+
+    for (int n = 0; n < movesCount ; ++n) {
+        Moves[arr[n]] = tempArray.at(n);
+    }
+//    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+//    shuffle(this->Moves.begin(),this->Moves.end(),default_random_engine(seed));
+//
+//    vector<ChessMove> tempArray;
+//
+//    for (int k = 0; k < 200 ; ++k) {
+//        if (this->Moves[k].From[0]==0 && this->Moves[k].From[1]==0 && this->Moves[k].To[0]==0 && this->Moves[k].To[1]==0){
+//            //continue;
+//        }
+//        else{
+//            tempArray.push_back(this->Moves[k]);
+//        }
+//    }
+//
+//    for (int l = 0; l < tempArray.size(); ++l) {
+//        this->Moves[l] = tempArray.at(l);
+//    }
+//
+//    for (int m = movesCount; m < 200 ; ++m) {
+//        this->Moves[m].From[0]=this->Moves[m].From[1]=this->Moves[m].To[0]=this->Moves[m].To[1]=0;
+//    }
+//    //The "Moves" array has been shuffled now. the max and min deadlock for repeated moves must be resolved now.
+
+    return this->movesCount;
 }
 
 bool ChessState:: isPlayerInCheck(){
@@ -1042,7 +1195,7 @@ bool ChessState:: isPlayerCheckedMate(){
     }
 
     tempoState.addValidCorresspondingMoveForPiece(kingIndex[0],kingIndex[1],tempoState.board);
-    ChessMove possiblMovesForKing [tempoState.movesCount];
+    ChessMove* possiblMovesForKing = new ChessMove[tempoState.movesCount];
     int totalTruesNeeded = tempoState.movesCount+1;
     int currentTrues =0;
     for (int l = 0; l < tempoState.movesCount ; ++l) {

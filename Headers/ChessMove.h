@@ -1,6 +1,8 @@
 #ifndef CHESSMOVE_H
 #define CHESSMOVE_H
 
+#include <string>
+using namespace std;
 
 class ChessMove
 {

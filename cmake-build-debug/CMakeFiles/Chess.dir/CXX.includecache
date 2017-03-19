@@ -9,6 +9,8 @@
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessBoard.h
 
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
+string
+-
 
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessPlayer.h
 ChessMove.h
@@ -25,6 +27,14 @@ PlayerChessCustom.h
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/PlayerChessCustom.h
 
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
+algorithm
+-
+array
+-
+random
+-
+chrono
+-
 ChessMove.h
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessMove.h
 
@@ -46,6 +56,8 @@ iostream
 ../Headers/ChessState.h
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Headers/ChessState.h
 iostream
+-
+vector
 -
 
 /Users/shoaibanwar/Desktop/In Process Assignments/Chess/Source/main.cpp

@@ -13,8 +13,11 @@ int main()
     chessProblem.Init();
 
     chessProblem.showCurrentState();
-    chessProblem.generateNextPossibleMoves();
-    chessProblem.showMovesForCurrentState();
+    //chessProblem.generateNextPossibleMoves();
+    //chessProblem.showMovesForCurrentState();
+    chessProblem.StartGamePlay();
+    //chessProblem.generateNextPossibleMoves();
+    //chessProblem.showMovesForCurrentState();
 
     //    chessState game;
 //    game.showState();

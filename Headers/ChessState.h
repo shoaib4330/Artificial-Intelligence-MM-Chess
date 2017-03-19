@@ -1,6 +1,10 @@
 #ifndef CHESSSTATE_H
 #define CHESSSTATE_H
 
+#include <algorithm>    // std::shuffle
+#include <array>        // std::array
+#include <random>       // std::default_random_engine
+#include <chrono>
 #include "ChessMove.h"
 
 class ChessState {
@@ -15,19 +19,31 @@ private:
     bool checkForKnight(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
     bool checkForKing(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
     bool checkForQueen(int currentPieceInteger, int toRow, int toCol, int fromRow, int fromCol);
-public:
-    ChessMove Moves[200];
+
     int playerToMove;
+
+public:
+    //std::array<ChessMove,200> Moves;
+    ChessMove Moves[200];
     int board[8][8];
     int movesCount;
 
-    int makeValidMovesList();
     ChessState();
+    int getPlayerToMove();
+    void setPlayerToMove(int);
+    int makeValidMovesList();
     void showState();
     void showMoves();
     bool makeMove(ChessMove pieceMove);
+    ChessState nextState(ChessMove gChessMove);
     bool isPlayerInCheck();
     bool isPlayerCheckedMate();
+
+    int getQueensNum(int);
+    int getRooksNum(int);
+    int getBishopsNum(int);
+    int getPawnsNum(int);
+    int getKnightsNum(int);
 
 };
 #endif // CHESSSTATE_H
