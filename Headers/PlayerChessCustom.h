@@ -27,9 +27,23 @@ private:
         //return 9.11;
     }
 
+    int max (int a, int b){
+        if (a>b)
+            return a;
+        else
+            return b;
+    }
+
+    int min (int a, int b){
+        if (a<b)
+            return a;
+        else
+            return b;
+    }
+
     ChessMove minimax(ChessState gChessState,int playerColor,int depthMax)
     {
-
+        //cout<<endl<<"------------MiniMax Prints----------------"<<endl;
         int chessMovesTotal = gChessState.makeValidMovesList();
         ChessMove best_move = gChessState.Moves[0];
 
@@ -49,8 +63,9 @@ private:
             ChessState nextState_By_Current_Move = gChessState.nextState(gChessState.Moves[moveIndex]);
             if (this->playerColor==+1)
             {
-                score = min_value(nextState_By_Current_Move,1,depthMax);
-                if (score >= best_score)
+                score = min_value(nextState_By_Current_Move,-999,999,1,depthMax);
+
+                if (score > best_score)
                 {
                     best_move = gChessState.Moves[moveIndex];
                     best_score = score;
@@ -59,8 +74,8 @@ private:
             }
             else if (this->playerColor==-1)
             {
-                score = max_value(nextState_By_Current_Move,1,depthMax);
-                if (score <= best_score)
+                score = max_value(nextState_By_Current_Move,-999,999,1,depthMax);
+                if (score < best_score)
                 {
                     best_move = gChessState.Moves[moveIndex];
                     best_score = score;
@@ -70,7 +85,8 @@ private:
         return best_move;
     }
 
-    int max_value(ChessState gChessState, int depthYet,int depthMax){
+    int max_value(ChessState gChessState, int alpha, int beta ,int depthYet,int depthMax){
+        //cout<<endl<<"------------MaxVal Prints----------------"<<endl;
         if(depthYet==depthMax)
         {
             //Call evaluation function here....
@@ -83,17 +99,20 @@ private:
         //Since we have not reached Max-Depth so lets continue
         for (int moveIndex = 0; moveIndex < chessMovesTotal ; ++moveIndex) {
             ChessState nextState_By_Current_Move = gChessState.nextState(gChessState.Moves[moveIndex]);
-            score = min_value(nextState_By_Current_Move,depthYet+1,depthMax);
-            if (score > best_score)
-            {
-                best_move = gChessState.Moves[moveIndex];
-                best_score = score;
-            }
+            score = min_value(nextState_By_Current_Move,alpha,beta,depthYet+1,depthMax);
+
+            best_score = max(best_score, score);
+            alpha = max(alpha, best_score);
+
+            // Alpha Beta Pruning
+            if (beta <= alpha)
+                break;
         }
         return best_score;
     }
 
-    int min_value(ChessState gChessState, int depthYet,int depthMax){
+    int min_value(ChessState gChessState, int alpha, int beta, int depthYet,int depthMax){
+        //cout<<endl<<"------------MinVal Prints----------------"<<endl;
         if(depthYet==depthMax)
         {
             //Call evaluation function here....
@@ -106,12 +125,14 @@ private:
         //Since we have not reached Max-Depth so lets continue
         for (int moveIndex = 0; moveIndex < chessMovesTotal ; ++moveIndex) {
             ChessState nextState_By_Current_Move = gChessState.nextState(gChessState.Moves[moveIndex]);
-            score = max_value(nextState_By_Current_Move,depthYet+1,depthMax);
-            if (score < best_score)
-            {
-                best_move = gChessState.Moves[moveIndex];
-                best_score = score;
-            }
+            score = max_value(nextState_By_Current_Move,alpha,beta,depthYet+1,depthMax);
+
+            best_score = min(best_score, score);
+            beta = min(beta, best_score);
+
+            // Alpha Beta Pruning
+            if (beta <= alpha)
+                break;
         }
         return best_score;
     }

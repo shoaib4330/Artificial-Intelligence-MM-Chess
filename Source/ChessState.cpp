@@ -1059,6 +1059,16 @@ void ChessState::addValidCorresspondingMoveForPiece(int pieceRow, int pieceColum
                 //--cout << endl << "Move might be possible, Adversary exists at targeted index";
                 bool toBeAdded = isTraversalPossible(currentPieceInteger, k, l, pieceRow, pieceColumn);
                 if (toBeAdded) {
+                    if (this->playerToMove==+1 && (pieceRow==0 || pieceRow == 1 || pieceRow ==2) )
+                    {
+                        //cout<<endl<<"Bleeep: Sign of White but Move's From is of Black"<<endl;
+                        //cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+                    }
+                    if (this->playerToMove==-1 && (pieceRow==7 || pieceRow == 6 || pieceRow ==5) )
+                    {
+                        //cout<<endl<<"Bleeep: Sign of Black but Move's From is of White"<<endl;
+                        //cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+                    }
                     this->Moves[this->movesCount].From[0] = pieceRow;
                     this->Moves[this->movesCount].From[1] = pieceColumn;
                     this->Moves[this->movesCount].To[0] = k;
