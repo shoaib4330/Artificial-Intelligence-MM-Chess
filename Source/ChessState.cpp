@@ -458,7 +458,7 @@ bool ChessState::checkForBishop(int currentPieceInteger, int toRow, int toCol, i
             if ((fromRow < 8 && fromRow >= 0) && (toRow < 8 && toRow >= 0) && (fromCol < 8 && fromCol >= 0) &&
                 (toCol < 8 && toCol >= 0)) {
                 //Now we know current position and targeted positions are in bounds
-                if (fromCol != toCol && fromRow != toRow) {
+                if (fromCol != toCol && fromRow != toRow && board[fromRow][fromCol] > 0) {
 
                     if (fromRow > toRow) {
                         if (fromCol > toCol) {
@@ -543,7 +543,7 @@ bool ChessState::checkForBishop(int currentPieceInteger, int toRow, int toCol, i
             if ((fromRow < 8 && fromRow >= 0) && (toRow < 8 && toRow >= 0) && (fromCol < 8 && fromCol >= 0) &&
                 (toCol < 8 && toCol >= 0)) {
                 //Now we know current position and targeted positions are in bounds
-                if (fromCol != toCol && fromRow != toRow) {
+                if (fromCol != toCol && fromRow != toRow && board[fromRow][fromCol] < 0) {
 
                     if (fromRow > toRow) {
                         if (fromCol > toCol) {
@@ -1061,13 +1061,19 @@ void ChessState::addValidCorresspondingMoveForPiece(int pieceRow, int pieceColum
                 if (toBeAdded) {
                     if (this->playerToMove==+1 && (pieceRow==0 || pieceRow == 1 || pieceRow ==2) )
                     {
-                        //cout<<endl<<"Bleeep: Sign of White but Move's From is of Black"<<endl;
-                        //cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+//                        cout<<endl<<"Bleeep: Sign of White but Move's From is of Black"<<endl;
+//                        cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+//                        cout<<endl<<"Goat is: ";
+//                        this->showPiece(board[pieceRow][pieceColumn]);
+//                        cout<<endl;
                     }
                     if (this->playerToMove==-1 && (pieceRow==7 || pieceRow == 6 || pieceRow ==5) )
                     {
-                        //cout<<endl<<"Bleeep: Sign of Black but Move's From is of White"<<endl;
-                        //cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+//                        cout<<endl<<"Bleeep: Sign of Black but Move's From is of White"<<endl;
+//                        cout<<endl<<"From: "<<pieceRow<<pieceColumn<<" to "<<k<<l<<endl;
+//                        cout<<endl<<"Goat is: ";
+//                        this->showPiece(board[pieceRow][pieceColumn]);
+//                        cout<<endl;
                     }
                     this->Moves[this->movesCount].From[0] = pieceRow;
                     this->Moves[this->movesCount].From[1] = pieceColumn;
